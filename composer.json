@@ -1,0 +1,46 @@
+{
+  "name": "swow-cloud/redis-subscriber",
+  "description": "redis-subscriber",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "swow-cloud",
+    "redis"
+  ],
+  "authors": [
+    {
+      "name": "heping",
+      "email": "84705412@qq.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^8.0",
+    "ext-swow": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SwowCloud\\RedisSubscriber\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SwowCloud\\RedisSubscriber\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "phpunit --colors=always",
+    "cs-fix": "php-cs-fixer fix --config=.php_cs",
+    "stan": "phpstan analyse"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.0.x-dev"
+    }
+  },
+  "version": "dev-master"
+}
