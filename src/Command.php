@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of SwowCloud
- * @license  https://github.com/swow-cloud/music-server/blob/main/LICENSE
+ * @license  https://github.com/swow-cloud/websocket-server/blob/main/LICENSE
  */
 
 declare(strict_types=1);
@@ -98,8 +98,8 @@ class Command
                     $this->interrupt();
                 });
                 $this->messageChannel->push($message);
-                //当通道满的时候此处会发生IO阻塞,当超过30秒后断开该连接，但是此处有个问题当socket断开的时候swow
-                //会提示Socket read has been canceled 需要考虑优化一下.
+                // 当通道满的时候此处会发生IO阻塞,当超过30秒后断开该连接，但是此处有个问题当socket断开的时候swow
+                // 会提示Socket read has been canceled 需要考虑优化一下.
                 $coroutine->kill();
                 $buffer = null;
             }

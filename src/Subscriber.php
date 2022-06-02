@@ -1,7 +1,12 @@
 <?php
 /**
  * This file is part of SwowCloud
- * @license  https://github.com/swow-cloud/music-server/blob/main/LICENSE
+ * @license  https://github.com/swow-cloud/websocket-server/blob/main/LICENSE
+ */
+
+/*
+ * This file is part of SwowCloud
+ * @license  https://github.com/swow-cloud/websocket-server/blob/main/LICENSE
  */
 
 declare(strict_types=1);
@@ -13,6 +18,7 @@ use JetBrains\PhpStorm\Pure;
 use Psr\Container\ContainerInterface;
 use Swow\Channel;
 use SwowCloud\RedisSubscriber\Exception\SubscribeException;
+use SwowCloud\RedisSubscriber\Exception\UnsubscribeException;
 
 class Subscriber implements SubscriberInterface
 {
@@ -54,8 +60,6 @@ class Subscriber implements SubscriberInterface
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
     /**
-     * @param string ...$channels
-     *
      * @throws \Throwable
      */
     public function subscribe(string ...$channels)
@@ -71,8 +75,6 @@ class Subscriber implements SubscriberInterface
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
     /**
-     * @param string ...$channels
-     *
      * @throws \Throwable
      */
     public function unsubscribe(string ...$channels)
@@ -80,7 +82,7 @@ class Subscriber implements SubscriberInterface
         $result = $this->command->invoke('unsubscribe ' . implode(' ', $channels), count($channels));
         foreach ($result as $value) {
             if ($value === false) {
-                $this->commandInvoker->interrupt();
+                $this->command->interrupt();
                 throw new UnsubscribeException('Unsubscribe failed');
             }
         }

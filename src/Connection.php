@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of SwowCloud
- * @license  https://github.com/swow-cloud/music-server/blob/main/LICENSE
+ * @license  https://github.com/swow-cloud/websocket-server/blob/main/LICENSE
  */
 
 declare(strict_types=1);
@@ -9,9 +9,10 @@ declare(strict_types=1);
 namespace SwowCloud\RedisSubscriber;
 
 use Swow\Socket;
-use Swow\Socket\Exception as SocketException;
+use Swow\SocketException;
 use Swow\Stream\EofStream;
 use Swow\Stream\StreamException;
+use Throwable;
 
 class Connection
 {
@@ -45,7 +46,7 @@ class Connection
             $client->connect($host, $port, $timeout);
             $this->client = $client;
         } catch (SocketException $e) {
-            //todo Catch the error
+            // todo Catch the error
         }
     }
 
